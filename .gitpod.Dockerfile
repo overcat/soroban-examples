@@ -1,10 +1,5 @@
 FROM gitpod/workspace-full:latest
 
-
-ENV RUSTC_WRAPPER=sccache
-ENV SCCACHE_CACHE_SIZE=5G
-ENV SCCACHE_DIR=/workspace/.sccache
-
 # Remove the existing rustup installation before updating due to:
 # https://github.com/gitpod-io/workspace-images/issues/933#issuecomment-1272616892
 RUN rustup self uninstall -y
@@ -24,3 +19,7 @@ ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
 RUN cargo install --locked sccache cargo-binstall cargo-watch 
 RUN cargo binstall -y stellar-cli
+
+ENV RUSTC_WRAPPER=sccache
+ENV SCCACHE_CACHE_SIZE=5G
+ENV SCCACHE_DIR=/workspace/.sccache
