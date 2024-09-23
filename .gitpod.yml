@@ -2,7 +2,7 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - name: Futurenet
+  - name: Testnet
     init: |
       docker pull stellar/quickstart
     command: |
@@ -10,16 +10,17 @@ tasks:
       --name stellar \
       -p 8000:8000 \
       stellar/quickstart \
-      --futurenet
+      --testnet \
+      --enable rpc
 
-  # This "CLI - Futurenet" task opens a terminal for you to interact with the
-  # futurenet network.
-  - name: CLI - Futurenet
-    # We specify some required environment variables for use on the futurenet.
+  # This "CLI - Testnet" task opens a terminal for you to interact with the
+  # testnet network.
+  - name: CLI - Testnet
+    # We specify some required environment variables for use on the testnet.
     env:
-      # This can be set by the user, but this terminal is dedicated to futurenet so set for convenience.
+      # This can be set by the user, but this terminal is dedicated to testnet so set for convenience.
       SOROBAN_RPC_URL: "http://127.0.0.1:8000/soroban/rpc"
-      SOROBAN_NETWORK_PASSPHRASE: "Test SDF Future Network ; October 2022"
+      SOROBAN_NETWORK_PASSPHRASE: "Test SDF Network ; September 2015"
     # To keep things tidy, we clear the terminal from the previous output.
     command: |
       clear
@@ -44,9 +45,9 @@ github:
     pullRequests: true
     pullRequestsFromForks: true
 ports:
-  # Your quickstart node has a Horizon API server and an RPC endpoint, both
+  # Your quickstart node has an RPC endpoint,
   # listening on port 8000. It's publicly accessible through the internet.
-  - name: Futurenet
+  - name: Testnet
     port: 8000
     visibility: public
     onOpen: ignore
