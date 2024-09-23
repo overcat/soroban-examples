@@ -17,7 +17,8 @@ RUN sudo apt-get update && sudo apt-get install -y binaryen
 # it needs from crates.io, rather than the entire registry.
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
-RUN cargo install --locked cargo-binstall 
+# Install cargo binstall
+RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 RUN cargo binstall -y stellar-cli cargo-watch sccache
 
 ENV RUSTC_WRAPPER=sccache
